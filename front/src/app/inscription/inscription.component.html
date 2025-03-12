@@ -1,14 +1,33 @@
 <div class="inscription">
     <h1>Créer votre compte</h1>
-    <h2>Nom/Prénom:</h2>
-    <input placeholder="Ex: Hoareau Alan...">
-    <h2>E-mail:</h2>
-    <input placeholder="Entrez votre email...">
-    <h2>Créez votre mot de passe:</h2>
-    <input placeholder="Entrez votre mot de passe...">
-    <h2>Confirmez votre mot de passe:</h2>
-    <input placeholder="Confirmez votre mot de passe...">
-    <button>Inscription</button>
+    <h2>Nom/Prénom <mark>*</mark>:</h2>
+    <input placeholder="Ex: Hoareau Alan..." [(ngModel)]="user.name">
+    <h2>E-mail <mark>*</mark>:</h2>
+    <input placeholder="Entrez votre email..." [(ngModel)]="user.email">
+    <form [formGroup]="passwordForm">
+        <h2>Créez votre mot de passe <mark>*</mark>:</h2>
+        <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password" placeholder="Entrez votre mot de passe...">
+        <button type="button" (click)="togglePasswordVisibility()">👁️</button>
+
+        <h2>Confirmez votre mot de passe <mark>*</mark>:</h2>
+        <input [type]="showPassword ? 'text' : 'password'" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirmez votre mot de passe...">
+    </form>
+    <button (click)="OnSubmit()">Inscription</button>
     <p>Déjà un compte ? <a routerLink="">Connectez-vous</a></p>
+    <p *ngIf="isMissing">Les champs (*) doivent être obligatoirement remplis</p>
+    <div *ngIf="passwordControl?.errors?.['weakPassword']">
+        Le mot de passe doit contenir au moins un chiffre et un caractère spécial.
+    </div>
+    <div *ngIf="!passwordControl?.errors?.['weakPassword']">
+    </div>
+    <div *ngIf="passwordControl?.errors?.['minlength']">
+        Le mot de passe doit contenir au moins 8 caractères.
+    </div>
+    <div *ngIf="passwordControl?.errors?.['maxlength']">
+        Le mot de passe ne doit pas dépasser 50 caractères.
+    </div>
+    <div *ngIf="passwordForm.errors?.['notMatching']">
+        Les mots de passe ne correspondent pas.
+    </div>
 </div>
 

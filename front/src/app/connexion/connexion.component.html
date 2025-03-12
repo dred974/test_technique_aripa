@@ -1,9 +1,9 @@
 <div class="connexion">
     <h1>Connexion à votre compte</h1>
     <h2>E-mail:</h2>
-    <input placeholder="Entrez votre email...">
+    <input placeholder="Entrez votre email..." [(ngModel)]="user.email">
     <h2>Mot de passe:</h2>
-    <input placeholder="Entrez votre mot de passe...">
-    <button>Connexion</button>
+    <input placeholder="Entrez votre mot de passe..." [(ngModel)]="user.password">
+    <button (click)="OnSubmit()">Connexion</button>
     <p>Pas de compte ? <a routerLink="/inscription">Inscrivez-vous</a></p>
 </div>

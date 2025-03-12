@@ -22,7 +22,7 @@ export class AuthController {
     async login(@Body() body: {email: string; password: string}) {
         const user = await this.authService.findByEmail(body.email);
         if (!user || !(await bcrypt.compare(body.password, user.password))) {
-        throw new BadRequestException('Invalid credentials');
+            throw new BadRequestException('Invalid credentials');
         }
         const token = this.jwtService.sign({ id: user.id, email: user.email });
         return { message: 'Login successful', token };

@@ -8,7 +8,8 @@ import * as bcrypt from 'bcryptjs';
 @Injectable()
 export class AuthService {
     constructor(
-        @InjectRepository(AuthEntity) private usersRepository: Repository<AuthEntity>
+        @InjectRepository(AuthEntity)
+        private usersRepository: Repository<AuthEntity>,
     ) {}
 
     async findByEmail(email: string): Promise<AuthEntity | null> {
